@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\backend",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\components"
   ],
+  "SelectedNode": "\\frontend\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

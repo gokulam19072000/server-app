@@ -9,6 +9,7 @@
     --accent-color-hover: #4338ca;
     --success-color: #10b981;
     --warning-color: #f59e0b;
+    --error-color: #ef4444;
 }
 
 body {
@@ -45,23 +46,27 @@ h1 {
 }
 
 .error-state {
-    color: var(--warning-color);
+    color: var(--error-color);
 }
 
 .dashboard-grid {
     display: grid;
     gap: 2rem;
-    grid-template-areas:
-        "metrics"
-        "actions"
-        "chart"
-        "services";
+}
+
+.action-buttons {
+    grid-area: actions;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .metric-cards {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .metric-card {
@@ -83,11 +88,6 @@ h1 {
     font-weight: 700;
 }
 
-.action-buttons {
-    grid-area: actions;
-    text-align: center;
-}
-
 button {
     background-color: var(--accent-color);
     color: white;
@@ -105,7 +105,7 @@ button {
         transform: translateY(-2px);
     }
 
-.chart-container, .services-container {
+.chart-container, .services-container, .log-panel-container {
     background-color: var(--card-background);
     border-radius: 0.75rem;
     padding: 1.5rem;
@@ -178,30 +178,61 @@ h2 {
 }
 
 .status-stopped, .status-not-found {
+    color: var(--error-color);
+}
+
+.log-panel {
+    height: 400px;
+    overflow-y: scroll;
+    padding: 1rem;
+    background-color: #0d121c;
+    border-radius: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.log-entry {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.log-info {
+    color: var(--text-color);
+}
+
+.log-warning {
     color: var(--warning-color);
+}
+
+.log-success {
+    color: var(--success-color);
+}
+
+.log-error {
+    color: var(--error-color);
 }
 
 /* Responsive adjustments */
 @media (min-width: 768px) {
     .dashboard-grid {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr;
         grid-template-areas:
-            "metrics metrics"
-            "actions actions"
-            "chart services";
+            "actions"
+            "metrics"
+            "chart"
+            "services"
+            "log";
     }
 }
 
 @media (min-width: 1024px) {
     .dashboard-grid {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 2fr 1fr;
         grid-template-areas:
-            "metrics metrics metrics"
-            "actions actions actions"
-            "chart services services";
-    }
-
-    .metric-cards {
-        flex-wrap: nowrap;
+            "actions actions"
+            "metrics metrics"
+            "chart services"
+            "log log";
     }
 }

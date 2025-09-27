@@ -27,6 +27,23 @@ def health_check():
     except json.JSONDecodeError:
         return jsonify({'status': 'error', 'message': f'Failed to parse JSON from PowerShell script. Output was: {result.stdout}'}), 500
 
+# API endpoint for getting initial server details
+@app.route('/api/serverdetails', methods=['GET'])
+def server_details():
+    try:
+        script_path = os.path.join(os.getcwd(), 'GetServerDetails.ps1')
+        command = ['powershell.exe', '-ExecutionPolicy', 'Bypass', '-File', script_path]
+        
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+        
+        data = json.loads(result.stdout)
+        return jsonify(data)
+    
+    except subprocess.CalledProcessError as e:
+        return jsonify({'status': 'error', 'message': e.stderr}), 500
+    except json.JSONDecodeError:
+        return jsonify({'status': 'error', 'message': f'Failed to parse JSON from PowerShell script. Output was: {result.stdout}'}), 500
+
 # API endpoint for clearing temporary files
 @app.route('/api/cleartemp', methods=['POST'])
 def clear_temp():

@@ -11,7 +11,6 @@ function App() {
         setLoading(true);
         setError(null);
         try {
-            // Corrected API endpoint to match the Flask backend
             const response = await fetch('http://127.0.0.1:5000/api/healthcheck');
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -29,11 +28,31 @@ function App() {
         }
     };
 
+    const fetchInitialData = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/serverdetails');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.json();
+            if (result.status === 'success') {
+                setData(result);
+            } else {
+                setError(result.message);
+            }
+        } catch (err) {
+            setError('Failed to fetch initial server details. Please check if the backend is running.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handleClearTemp = async () => {
         setLoading(true);
         setError(null);
         try {
-            // Corrected API endpoint to match the Flask backend
             const response = await fetch('http://127.0.0.1:5000/api/cleartemp', { method: 'POST' });
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -41,6 +60,7 @@ function App() {
             const result = await response.json();
             if (result.status === 'success') {
                 alert(result.message);
+                fetchData();
             } else {
                 alert(`Error: ${result.message}`);
             }
@@ -51,14 +71,17 @@ function App() {
         }
     };
 
-    useEffect(() => {
+    const handleRunHealthCheck = async () => {
         fetchData();
-        const interval = setInterval(fetchData, 60000); // Fetch data every 60 seconds
-        return () => clearInterval(interval);
+    };
+
+    // This useEffect hook now calls the new fetchInitialData function to load the dashboard quickly.
+    useEffect(() => {
+        fetchInitialData();
     }, []);
 
     if (loading && !data) {
-        return <div className="loading-state">Loading server data...</div>;
+        return <div className="loading-state">Loading server details...</div>;
     }
 
     if (error) {
@@ -71,7 +94,11 @@ function App() {
                 <h1>Windows Server Health Dashboard</h1>
             </header>
             <main>
-                <Dashboard data={data} handleClearTemp={handleClearTemp} />
+                <Dashboard
+                    data={data}
+                    handleClearTemp={handleClearTemp}
+                    handleRunHealthCheck={handleRunHealthCheck}
+                />
             </main>
         </div>
     );
