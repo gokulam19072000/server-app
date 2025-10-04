@@ -75,9 +75,10 @@ function App() {
         fetchData();
     };
 
-    // This useEffect hook now calls the new fetchInitialData function to load the dashboard quickly.
     useEffect(() => {
-        fetchInitialData();
+        fetchData(); // Fetch once on mount
+        const interval = setInterval(fetchData, 120000); // Fetch every 60 seconds
+        return () => clearInterval(interval); // Clean up on unmount
     }, []);
 
     if (loading && !data) {
