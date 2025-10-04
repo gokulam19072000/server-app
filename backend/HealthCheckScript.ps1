@@ -42,7 +42,7 @@ function Get-ServerMetrics {
 function Check-Services {
     Write-Log "Checking critical services..."
     $services = @()
-    $criticalServices = @("Dnscache", "Dhcpserver")
+    $criticalServices = @("Dnscache", "Dhcpserver", "wuauserv", "EventLog", "Winmgmt", "TermService")
     foreach ($serviceName in $criticalServices) {
         $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
         
