@@ -52,7 +52,46 @@ h1 {
 .dashboard-grid {
     display: grid;
     gap: 2rem;
+    grid-template-columns: 1fr;
 }
+
+/* Grid layout for wide screens */
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "actions actions"
+            "metrics metrics"
+            "graph graph"
+            "disk services"
+            "log log";
+    }
+
+    .action-buttons {
+        grid-area: actions;
+    }
+
+    .metric-cards {
+        grid-area: metrics;
+    }
+
+    .memory-graph-container {
+        grid-area: graph;
+    }
+
+    .chart-container:nth-of-type(2) {
+        grid-area: disk;
+    }
+    /* C: Drive Space Chart */
+    .services-container {
+        grid-area: services;
+    }
+
+    .log-panel-container {
+        grid-area: log;
+    }
+}
+
 
 .action-buttons {
     grid-area: actions;
@@ -105,12 +144,38 @@ button {
         transform: translateY(-2px);
     }
 
-.chart-container, .services-container, .log-panel-container {
+.chart-container, .services-container, .log-panel-container, .memory-graph-container {
     background-color: var(--card-background);
     border-radius: 0.75rem;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* --- GRAPH STYLES --- */
+.memory-graph-container {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .memory-graph-container h3 {
+        margin-top: 0;
+        color: var(--text-color);
+        font-size: 1.2rem;
+    }
+
+.memory-svg {
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.current-usage-label {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+}
+
 
 h2 {
     font-size: 1.5rem;
@@ -214,25 +279,19 @@ h2 {
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
+@media (max-width: 1023px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
             "actions"
             "metrics"
-            "chart"
+            "graph"
+            "disk"
             "services"
             "log";
     }
-}
 
-@media (min-width: 1024px) {
-    .dashboard-grid {
-        grid-template-columns: 2fr 1fr;
-        grid-template-areas:
-            "actions actions"
-            "metrics metrics"
-            "chart services"
-            "log log";
+    .metric-cards {
+        flex-direction: column;
     }
 }

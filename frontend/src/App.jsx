@@ -4,11 +4,13 @@ import './index.css';
 
 function App() {
     const [data, setData] = useState(null);
+    const [history, setHistory] = useState([]); // New state for metric history
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // Function to fetch the FULL health check report (intensive)
     const fetchData = async () => {
-        setLoading(true);
+        setLoading(true); // START LOADING
         setError(null);
         try {
             const response = await fetch('http://127.0.0.1:5000/api/healthcheck');
@@ -16,18 +18,35 @@ function App() {
                 throw new Error('Network response was not ok');
             }
             const result = await response.json();
+            
             if (result.status === 'success') {
                 setData(result);
+                
+                // Update history state
+                setHistory(prevHistory => {
+                    if (result.metrics && result.metrics.totalMemoryGB > 0) {
+                        const usedPercent = (result.metrics.usedMemoryGB / result.metrics.totalMemoryGB) * 100;
+
+                        const newEntry = {
+                            timestamp: Date.now(),
+                            usedPercent: usedPercent,
+                        };
+                        // Limit history to last 15 entries
+                        return [...prevHistory, newEntry].slice(-15); 
+                    }
+                    return prevHistory;
+                });
             } else {
                 setError(result.message);
             }
         } catch (err) {
             setError('Failed to fetch server data. Please check if the backend is running.');
         } finally {
-            setLoading(false);
+            setLoading(false); // END LOADING
         }
     };
 
+    // Function to fetch only initial data (lightweight)
     const fetchInitialData = async () => {
         setLoading(true);
         setError(null);
@@ -39,6 +58,15 @@ function App() {
             const result = await response.json();
             if (result.status === 'success') {
                 setData(result);
+                
+                // Initialize history with the first data point
+                if (result.metrics && result.metrics.totalMemoryGB > 0) {
+                     const usedPercent = (result.metrics.usedMemoryGB / result.metrics.totalMemoryGB) * 100;
+                     setHistory([{
+                        timestamp: Date.now(),
+                        usedPercent: usedPercent,
+                    }]);
+                }
             } else {
                 setError(result.message);
             }
@@ -75,12 +103,12 @@ function App() {
         fetchData();
     };
 
+    // CRITICAL FIX: Calls the lightweight fetchInitialData on component mount.
     useEffect(() => {
-        fetchData(); // Fetch once on mount
-        const interval = setInterval(fetchData, 120000); // Fetch every 60 seconds
-        return () => clearInterval(interval); // Clean up on unmount
+        fetchInitialData();
     }, []);
 
+    // Display loading state only on initial page load
     if (loading && !data) {
         return <div className="loading-state">Loading server details...</div>;
     }
@@ -97,8 +125,10 @@ function App() {
             <main>
                 <Dashboard
                     data={data}
+                    usageHistory={history}
                     handleClearTemp={handleClearTemp}
                     handleRunHealthCheck={handleRunHealthCheck}
+                    isLoading={loading} // Pass loading state to Dashboard for button control
                 />
             </main>
         </div>

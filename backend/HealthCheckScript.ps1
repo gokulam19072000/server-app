@@ -18,31 +18,36 @@ function Write-Log {
     }
 }
 
-# --- Health Check Functions ---
-function Get-ServerMetrics {
-    Write-Log "Gathering system metrics (CPU, Memory, Disk)..."
+# --- Utility Function to get all System Metrics ---
+function Get-SystemMetricsData {
+    Write-Log "1. Gathering core system usage data (CPU, Memory, Disk space)..."
     
     $cpu = Get-CimInstance -ClassName Win32_PerfFormattedData_PerfOS_Processor | Where-Object { $_.Name -eq "_Total" }
     $memory = Get-CimInstance -ClassName Win32_OperatingSystem
     $disk = Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DeviceID='C:'"
+
+    $diskSpaceMetrics = [PSCustomObject]@{
+        totalGB = [math]::Round($disk.Size / 1GB, 2)
+        usedGB = [math]::Round(($disk.Size - $disk.FreeSpace) / 1GB, 2)
+        freeGB = [math]::Round($disk.FreeSpace / 1GB, 2)
+        usedPercent = [math]::Round((1 - ($disk.FreeSpace / $disk.Size)) * 100, 2)
+    }
 
     $metrics = [PSCustomObject]@{
         cpuUsage = [math]::Round($cpu.PercentProcessorTime, 2)
         totalMemoryGB = [math]::Round($memory.TotalVisibleMemorySize / 1MB, 2)
         freeMemoryGB = [math]::Round($memory.FreePhysicalMemory / 1MB, 2)
         usedMemoryGB = [math]::Round(($memory.TotalVisibleMemorySize - $memory.FreePhysicalMemory) / 1MB, 2)
-        totalDiskGB = [math]::Round($disk.Size / 1GB, 2)
-        usedDiskGB = [math]::Round(($disk.Size - $disk.FreeSpace) / 1GB, 2)
-        freeDiskGB = [math]::Round($disk.FreeSpace / 1GB, 2)
-        diskUsedPercent = [math]::Round((1 - ($disk.FreeSpace / $disk.Size)) * 100, 2)
+        diskSpace = $diskSpaceMetrics
+        pendingUpdates = 0 # Updates check runs later
     }
     return $metrics
 }
 
 function Check-Services {
-    Write-Log "Checking critical services..."
+    Write-Log "2. Checking status of critical Windows services (DNS, DHCP, etc.)..."
     $services = @()
-    $criticalServices = @("Dnscache", "Dhcpserver", "wuauserv", "EventLog", "Winmgmt", "TermService")
+    $criticalServices = @("Dnscache", "Dhcpserver")
     foreach ($serviceName in $criticalServices) {
         $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
         
@@ -51,20 +56,20 @@ function Check-Services {
         if ($service) {
             $status = $service.Status.ToString()
             if ($status -ne "Running") {
-                Write-Log "Warning: $serviceName is in a '$status' state. Attempting to restart..." "warning"
+                Write-Log "Warning: The service '$serviceName' is stopped. Attempting to restart automatically." "warning"
                 try {
                     Start-Service -Name $serviceName -ErrorAction Stop
                     $restarted = $true
                     $status = "Running"
-                    Write-Log "$serviceName restarted successfully." "success"
+                    Write-Log "Success: '$serviceName' was restarted and is now functional." "success"
                 } catch {
-                    Write-Log ("Error restarting " + $serviceName + ": " + $_.Exception.Message) "error"
+                    Write-Log ("Error: Failed to restart '" + $serviceName + "'. Check system event logs.") "error"
                 }
             } else {
-                Write-Log "Service $serviceName is running." "success"
+                Write-Log "Info: Service '$serviceName' is running normally." "success"
             }
         } else {
-            Write-Log "Warning: Service '$serviceName' not found." "warning"
+            Write-Log "Warning: Critical service '$serviceName' is not installed or found on the system." "warning"
         }
 
         $services += [PSCustomObject]@{
@@ -77,7 +82,7 @@ function Check-Services {
 }
 
 function Check-DiskSpace {
-    Write-Log "Checking C: drive space..."
+    Write-Log "3. Analyzing C: drive space..."
     $driveLetter = "C:"
     $thresholdPercent = 80
     $disk = Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DeviceID='$driveLetter'"
@@ -86,13 +91,13 @@ function Check-DiskSpace {
     $freeSpaceGB = [math]::Round($disk.FreeSpace / 1GB, 2)
 
     if ($usedSpacePercent -ge $thresholdPercent) {
-        Write-Log "C: drive usage ($usedSpacePercent%) exceeds threshold ($thresholdPercent%). Initiating cleanup..." "warning"
+        Write-Log "Action Required: Disk usage ($usedSpacePercent%) is high. Initiating cleanup of temporary files." "warning"
         Clear-TempFiles
         $diskAfterCleanup = Get-CimInstance -ClassName Win32_LogicalDisk -Filter "DeviceID='$driveLetter'"
         $usedSpacePercentAfter = [math]::Round((1 - ($diskAfterCleanup.FreeSpace / $diskAfterCleanup.Size)) * 100, 2)
-        Write-Log "Cleanup complete. Used space is now $usedSpacePercentAfter%." "info"
+        Write-Log "Cleanup complete. Disk usage reduced to $usedSpacePercentAfter%." "success"
     } else {
-        Write-Log "C: drive usage ($usedSpacePercent%) is below threshold ($thresholdPercent%). No cleanup needed." "success"
+        Write-Log "Info: C: drive usage ($usedSpacePercent%) is within safe limits. No cleanup performed." "success"
     }
 
     return [PSCustomObject]@{
@@ -104,7 +109,7 @@ function Check-DiskSpace {
 }
 
 function Check-WindowsUpdates {
-    Write-Log "Checking for pending Windows updates..."
+    Write-Log "4. Checking for missing Windows security updates..."
     try {
         $updateSession = New-Object -ComObject Microsoft.Update.Session
         $updateSearcher = $updateSession.CreateUpdateSearcher()
@@ -113,22 +118,22 @@ function Check-WindowsUpdates {
         $pendingUpdates = $searchResult.Updates | Select-Object Title
         
         if ($pendingUpdates.Count -eq 0) {
-            Write-Log "Server is up-to-date with patches." "success"
+            Write-Log "Success: The server has no critical updates pending installation." "success"
         } else {
-            Write-Log "Warning: Found $($pendingUpdates.Count) missing updates." "warning"
+            Write-Log "Warning: Found $($pendingUpdates.Count) missing security updates. Manual installation is recommended." "warning"
             foreach ($update in $pendingUpdates) {
-                Write-Log "Missing update: $($update.Title)" "warning"
+                Write-Log "Update Found: $($update.Title)" "warning"
             }
         }
         return $pendingUpdates.Count
     } catch {
-        Write-Log "Error checking for updates: $($_.Exception.Message)" "error"
+        Write-Log "Error: Could not communicate with Windows Update service." "error"
         return $null
     }
 }
 
 function Clear-TempFiles {
-    Write-Log "Starting temporary file cleanup..."
+    Write-Log "Starting temporary file cleanup process..."
     
     $tempPaths = @(
         "$env:windir\Temp\*",
@@ -137,24 +142,24 @@ function Clear-TempFiles {
     foreach ($path in $tempPaths) {
         try {
             Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue | Out-Null
-            Write-Log "Successfully cleaned: $path" "success"
+            Write-Log "Cleaned temporary files in: $path" "info"
         } catch {
-            Write-Log ("Error cleaning " + $path + ": " + $_.Exception.Message) "error"
+            Write-Log ("Error cleaning files in: " + $path + ". File may be in use.") "error"
         }
     }
     
     try {
         Clear-RecycleBin -DriveLetter "C" -Force -ErrorAction SilentlyContinue | Out-Null
-        Write-Log "Recycle Bin emptied successfully." "success"
+        Write-Log "Recycle Bin emptied successfully." "info"
     } catch {
-        Write-Log "Error emptying Recycle Bin: $($_.Exception.Message)" "error"
+        Write-Log "Error emptying Recycle Bin. Manual review needed." "error"
     }
 }
 
 # --- Main logic ---
 switch ($Action) {
     "healthcheck" {
-        $metrics = Get-ServerMetrics
+        $metrics = Get-SystemMetricsData
         $services = Check-Services
         $diskSpace = Check-DiskSpace
         $pendingUpdates = Check-WindowsUpdates

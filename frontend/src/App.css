@@ -1,42 +1,238 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --background-color: #0f172a;
+    --card-background: #1a202c;
+    --text-color: #e2e8f0;
+    --secondary-text-color: #94a3b8;
+    --accent-color: #4f46e5;
+    --accent-color-hover: #4338ca;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-.card {
-  padding: 2em;
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
 }
 
-.read-the-docs {
-  color: #888;
+.loading-state, .error-state {
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 2rem;
+}
+
+.error-state {
+    color: var(--error-color);
+}
+
+.dashboard-grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.action-buttons {
+    grid-area: actions;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metric-cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.metric-card {
+    flex: 1;
+    min-width: 250px;
+    background-color: var(--card-background);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.metric-title {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+    button:hover {
+        background-color: var(--accent-color-hover);
+        transform: translateY(-2px);
+    }
+
+.chart-container, .services-container, .log-panel-container {
+    background-color: var(--card-background);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #475569;
+    padding-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.disk-chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+    .disk-chart svg {
+        margin-bottom: 1rem;
+        transform: rotate(-90deg);
+    }
+
+.disk-chart-background {
+    fill: none;
+    stroke: #475569;
+}
+
+.disk-chart-used {
+    fill: none;
+    stroke: var(--accent-color);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s;
+}
+
+.disk-chart-text {
+    fill: var(--text-color);
+    font-size: 1.5rem;
+    transform: rotate(90deg);
+}
+
+.disk-chart-legend {
+    display: flex;
+    gap: 2rem;
+    color: var(--secondary-text-color);
+}
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .service-table th, .service-table td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #475569;
+    }
+
+    .service-table th {
+        font-weight: 600;
+        color: var(--secondary-text-color);
+    }
+
+.status-running {
+    color: var(--success-color);
+}
+
+.status-stopped, .status-not-found {
+    color: var(--error-color);
+}
+
+.log-panel {
+    height: 400px;
+    overflow-y: scroll;
+    padding: 1rem;
+    background-color: #0d121c;
+    border-radius: 0.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.log-entry {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.log-info {
+    color: var(--text-color);
+}
+
+.log-warning {
+    color: var(--warning-color);
+}
+
+.log-success {
+    color: var(--success-color);
+}
+
+.log-error {
+    color: var(--error-color);
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "actions"
+            "metrics"
+            "chart"
+            "services"
+            "log";
+    }
+}
+
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas:
+            "actions actions"
+            "metrics metrics"
+            "chart services"
+            "log log";
+    }
 }
