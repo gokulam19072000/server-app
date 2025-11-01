@@ -77,6 +77,10 @@ h1 {
 
     .memory-graph-container {
         grid-area: graph;
+        padding: 1.5rem;
+        background-color: var(--card-background);
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .chart-container:nth-of-type(2) {
@@ -139,12 +143,17 @@ button {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-    button:hover {
+    button:hover:not(:disabled) {
         background-color: var(--accent-color-hover);
         transform: translateY(-2px);
     }
 
-.chart-container, .services-container, .log-panel-container, .memory-graph-container {
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+.chart-container, .services-container, .log-panel-container {
     background-color: var(--card-background);
     border-radius: 0.75rem;
     padding: 1.5rem;
@@ -152,14 +161,13 @@ button {
 }
 
 /* --- GRAPH STYLES --- */
-.memory-graph-container {
-    padding: 1.5rem;
+.memory-graph-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-    .memory-graph-container h3 {
+    .memory-graph-content h3 {
         margin-top: 0;
         color: var(--text-color);
         font-size: 1.2rem;
@@ -174,8 +182,17 @@ button {
 .current-usage-label {
     font-size: 1rem;
     color: var(--secondary-text-color);
+    font-weight: bold;
 }
 
+.graph-placeholder {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-text-color);
+    font-style: italic;
+}
 
 h2 {
     font-size: 1.5rem;
@@ -276,6 +293,66 @@ h2 {
 
 .log-error {
     color: var(--error-color);
+}
+
+/* Dynamic Pop-up Styles */
+.log-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 1.5rem 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    animation: fadeInOut 3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--card-background);
+}
+
+    .log-popup.log-info {
+        border-left: 5px solid var(--accent-color);
+        color: var(--text-color);
+    }
+
+    .log-popup.log-success {
+        border-left: 5px solid var(--success-color);
+        color: var(--success-color);
+    }
+
+    .log-popup.log-warning {
+        border-left: 5px solid var(--warning-color);
+        color: var(--warning-color);
+    }
+
+    .log-popup.log-error {
+        border-left: 5px solid var(--error-color);
+        color: var(--error-color);
+    }
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    90% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
 }
 
 /* Responsive adjustments */

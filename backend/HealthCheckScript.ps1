@@ -8,7 +8,7 @@ param (
 
 $results = @()
 
-# Function to write to log and console
+# Function to write to log and console (used globally via $script:results)
 function Write-Log {
     param($Message, $Type = "info")
     $script:results += [PSCustomObject]@{
@@ -100,6 +100,7 @@ function Check-DiskSpace {
         Write-Log "Info: C: drive usage ($usedSpacePercent%) is within safe limits. No cleanup performed." "success"
     }
 
+    # Return the metrics for use by the main logic (disk check is done here for efficiency)
     return [PSCustomObject]@{
         totalGB = [math]::Round($disk.Size / 1GB, 2)
         usedGB = [math]::Round(($disk.Size - $disk.FreeSpace) / 1GB, 2)
@@ -161,8 +162,13 @@ switch ($Action) {
     "healthcheck" {
         $metrics = Get-SystemMetricsData
         $services = Check-Services
-        $diskSpace = Check-DiskSpace
-        $pendingUpdates = Check-WindowsUpdates
+        $diskSpaceMetrics = Check-DiskSpace # Get the disk metrics from the check function
+        $pendingUpdatesCount = Check-WindowsUpdates # Get the update count
+
+        # CRITICAL FIX: Merge metrics data correctly
+        $metrics.diskSpace = $diskSpaceMetrics
+        $metrics.pendingUpdates = $pendingUpdatesCount
+
         $report = [PSCustomObject]@{
             status = "success"
             message = "Full health check complete."

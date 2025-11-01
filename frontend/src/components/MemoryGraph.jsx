@@ -3,8 +3,8 @@ import React from 'react';
 // This component simulates a memory usage history graph using inline SVG
 const MemoryGraph = ({ usageHistory }) => {
     // Check if history is meaningful (more than 1 point to draw a line)
-    if (!usageHistory || usageHistory.length < 2) {
-        return <div className="graph-placeholder">Run a full health check multiple times to see usage history.</div>;
+    if (!usageHistory || usageHistory.length < 1) {
+        return <div className="graph-placeholder">Run a full health check to start tracking memory usage.</div>;
     }
 
     const width = 450;
@@ -24,7 +24,7 @@ const MemoryGraph = ({ usageHistory }) => {
     const lastUsage = usageHistory[usageHistory.length - 1].usedPercent.toFixed(1);
 
     return (
-        <div className="memory-graph-container">
+        <div className="memory-graph-content">
             <h3>Memory Usage History (Last {usageHistory.length} Readings)</h3>
             <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="memory-svg">
 
@@ -48,6 +48,3 @@ const MemoryGraph = ({ usageHistory }) => {
 };
 
 export default MemoryGraph;
-
-
-

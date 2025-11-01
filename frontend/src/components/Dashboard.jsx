@@ -8,7 +8,6 @@ import MemoryGraph from './MemoryGraph';
 const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, isLoading }) => {
     // 1. Initial check for data presence
     if (!data || !data.metrics) {
-        // Fallback or loading state if core data is missing
         return <div className="loading-state">Loading dashboard...</div>;
     }
 
@@ -47,7 +46,7 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
             </div>
 
             {/* NEW GRAPH SECTION */}
-            <div className="memory-graph-container">
+            <div className="memory-graph-container chart-container">
                 <MemoryGraph usageHistory={usageHistory} />
             </div>
             {/* END NEW GRAPH SECTION */}
@@ -64,9 +63,9 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
             </div>
 
             <div className="log-panel-container">
-                <h2>Activity Log</h2>
+                <h2>Activity Log (Detailed)</h2>
                 {isLoading ? (
-                    <div className="log-panel-placeholder">**{buttonText}** Please wait for system response...</div>
+                    <div className="log-panel-placeholder loading-text">**{buttonText}** Please wait for system response...</div>
                 ) : isFullReport ? (
                     <LogPanel logs={currentLogs} />
                 ) : (
