@@ -4,7 +4,7 @@ import './index.css';
 
 function App() {
     const [data, setData] = useState(null);
-    const [history, setHistory] = useState([]); // State for metric history
+    const [history, setHistory] = useState([]); // State for metric history {usedPercent, cpuUsage, timestamp}
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [logPopup, setLogPopup] = useState(null); // State for dynamic log pop-up
@@ -16,7 +16,25 @@ function App() {
             type: log.type,
             timestamp: new Date().toLocaleTimeString()
         });
+        // Set timeout to clear the pop-up
         setTimeout(() => setLogPopup(null), 3000); // Hide after 3 seconds
+    };
+
+    // Helper function to update History after any successful data fetch
+    const updateHistory = (result) => {
+        if (result.metrics && result.metrics.totalMemoryGB > 0) {
+            // Calculate memory usage percentage
+            const usedPercent = (result.metrics.usedMemoryGB / result.metrics.totalMemoryGB) * 100;
+
+            const newEntry = {
+                timestamp: Date.now(),
+                usedPercent: usedPercent,
+                cpuUsage: result.metrics.cpuUsage, // Add CPU usage to history
+            };
+
+            // Add new entry and keep only the last 15 entries
+            setHistory(prevHistory => [...prevHistory, newEntry].slice(-15));
+        }
     };
 
     // Function to fetch the FULL health check report (intensive)
@@ -24,8 +42,7 @@ function App() {
         setLoading(true); // START LOADING
         setError(null);
 
-        // Show starting message immediately
-        showLogPopup({ message: "Starting full server health check...", type: "info" });
+        showLogPopup({ message: "Starting full server health check sequence. Please wait...", type: "info" });
 
         try {
             const response = await fetch('http://127.0.0.1:5000/api/healthcheck');
@@ -41,31 +58,21 @@ function App() {
                 // Display logs one by one in the dynamic pop-up
                 for (const log of result.logs) {
                     showLogPopup(log);
-                    // Delay is crucial for displaying logs one after another
+                    // Wait 600ms before showing the next log
                     await new Promise(resolve => setTimeout(resolve, 600));
                 }
 
-                // Update history state
-                setHistory(prevHistory => {
-                    if (result.metrics && result.metrics.totalMemoryGB > 0) {
-                        const usedPercent = (result.metrics.usedMemoryGB / result.metrics.totalMemoryGB) * 100;
-
-                        const newEntry = {
-                            timestamp: Date.now(),
-                            usedPercent: usedPercent,
-                        };
-                        return [...prevHistory, newEntry].slice(-15);
-                    }
-                    return prevHistory;
-                });
+                updateHistory(result); // Update graph history
+                showLogPopup({ message: "Health check sequence complete.", type: "success" });
             } else {
                 setError(result.message);
+                showLogPopup({ message: `Health check failed: ${result.message}`, type: "error" });
             }
         } catch (err) {
             setError('Failed to fetch server data. Please check if the backend is running.');
+            showLogPopup({ message: "Connection Error: Failed to reach the server.", type: "error" });
         } finally {
             setLoading(false); // END LOADING
-            showLogPopup({ message: "Health check sequence complete.", type: "success" });
         }
     };
 
@@ -84,11 +91,7 @@ function App() {
 
                 // Initialize history with the first data point
                 if (result.metrics && result.metrics.totalMemoryGB > 0) {
-                    const usedPercent = (result.metrics.usedMemoryGB / result.metrics.totalMemoryGB) * 100;
-                    setHistory([{
-                        timestamp: Date.now(),
-                        usedPercent: usedPercent,
-                    }]);
+                    updateHistory(result);
                 }
             } else {
                 setError(result.message);
@@ -111,19 +114,54 @@ function App() {
             }
             const result = await response.json();
 
-            // Display cleanup logs one by one
             if (result.status === 'success') {
+                // Display cleanup logs one by one
                 for (const log of result.logs) {
                     showLogPopup(log);
                     await new Promise(resolve => setTimeout(resolve, 600));
                 }
-                showLogPopup({ message: "Clean-up sequence complete.", type: "success" });
+                showLogPopup({ message: "Clean-up sequence complete. Refreshing metrics.", type: "success" });
                 fetchInitialData(); // Refresh data after cleanup
             } else {
                 setError(result.message);
+                showLogPopup({ message: `Clean-up failed: ${result.message}`, type: "error" });
             }
         } catch (err) {
             alert('Failed to connect to the backend.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // NEW HANDLER: Install Updates
+    const handleInstallUpdates = async () => {
+        setLoading(true);
+        setError(null);
+        showLogPopup({ message: "Installation process starting. Please do not close this window.", type: "warning" });
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/installupdates', { method: 'POST' });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                // Display installation logs one by one
+                for (const log of result.logs) {
+                    showLogPopup(log);
+                    await new Promise(resolve => setTimeout(resolve, 600));
+                }
+                showLogPopup({ message: "Installation finished. Refreshing metrics.", type: "success" });
+                // Update data with the new metrics returned from the install action
+                setData(result);
+                updateHistory(result);
+            } else {
+                setError(result.message);
+                showLogPopup({ message: `Installation failed: ${result.message}`, type: "error" });
+            }
+        } catch (err) {
+            setError('Failed to connect to the backend.');
+            showLogPopup({ message: "Connection Error: Failed to reach the server.", type: "error" });
         } finally {
             setLoading(false);
         }
@@ -133,6 +171,7 @@ function App() {
         fetchData();
     };
 
+    // Calls the lightweight fetchInitialData on component mount.
     useEffect(() => {
         fetchInitialData();
     }, []);
@@ -157,7 +196,8 @@ function App() {
                     usageHistory={history}
                     handleClearTemp={handleClearTemp}
                     handleRunHealthCheck={handleRunHealthCheck}
-                    isLoading={loading} // Pass loading state to Dashboard for button control
+                    handleInstallUpdates={handleInstallUpdates} // Pass new handler
+                    isLoading={loading}
                 />
             </main>
             {/* Dynamic Popup Message for User Feedback */}
@@ -171,3 +211,4 @@ function App() {
 }
 
 export default App;
+

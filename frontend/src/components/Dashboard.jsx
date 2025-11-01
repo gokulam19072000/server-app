@@ -4,8 +4,9 @@ import DiskChart from './DiskChart';
 import ServiceTable from './ServiceTable';
 import LogPanel from './LogPanel';
 import MemoryGraph from './MemoryGraph';
+import CPUGraph from './CPUGraph'; // NEW CPU GRAPH IMPORT
 
-const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, isLoading }) => {
+const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, handleInstallUpdates, isLoading }) => {
     // 1. Initial check for data presence
     if (!data || !data.metrics) {
         return <div className="loading-state">Loading dashboard...</div>;
@@ -13,16 +14,24 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
 
     const { metrics, services, logs } = data;
 
-    // 2. Safely access nested properties, ensuring they exist or default to an empty object/array
+    // 2. Safely access nested properties
     const diskSpace = metrics.diskSpace || {};
     const currentServices = services || [];
     const currentLogs = logs || [];
-    // Ensure pendingUpdates is treated as a number or fallback string
-    const pendingUpdates = metrics.pendingUpdates !== undefined ? metrics.pendingUpdates : 'N/A';
+    // CRITICAL FIX: Ensure pendingUpdates is a number for correct button logic
+    const pendingUpdates = typeof metrics.pendingUpdates === 'number' ? metrics.pendingUpdates : 'N/A';
 
     // Determine if the full health check has been run (logs will only be populated after full run)
     const isFullReport = currentLogs.length > 0;
     const buttonText = isLoading ? "Running Checks..." : "Run Full Health Check";
+
+    // Logic for Install Updates button text and state
+    const isUpdatesAvailable = pendingUpdates > 0;
+    const installButtonDisabled = isLoading || pendingUpdates === 'N/A' || pendingUpdates === 0;
+    const installButtonText = isLoading
+        ? "Please wait..."
+        : (pendingUpdates === 'N/A' ? 'Check Updates' : (isUpdatesAvailable ? `Install Updates (${pendingUpdates})` : 'No Updates'));
+
 
     return (
         <div className="dashboard-grid">
@@ -30,6 +39,15 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
                 {/* Disable button while loading */}
                 <button onClick={handleRunHealthCheck} disabled={isLoading}>{buttonText}</button>
                 <button onClick={handleClearTemp} disabled={isLoading}>Clear Temp Files</button>
+
+                {/* INSTALL UPDATES BUTTON */}
+                <button
+                    onClick={handleInstallUpdates}
+                    disabled={installButtonDisabled}
+                    className={isUpdatesAvailable && !isLoading ? 'button-warning' : ''}
+                >
+                    {installButtonText}
+                </button>
             </div>
 
             <div className="metric-cards">
@@ -45,8 +63,11 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
                 <MetricCard title="Pending Updates" value={pendingUpdates} type="updates" />
             </div>
 
-            {/* NEW GRAPH SECTION */}
-            <div className="memory-graph-container chart-container">
+            {/* CPU AND MEMORY GRAPHS - Side by side layout */}
+            <div className="chart-container">
+                <CPUGraph usageHistory={usageHistory} />
+            </div>
+            <div className="chart-container">
                 <MemoryGraph usageHistory={usageHistory} />
             </div>
             {/* END NEW GRAPH SECTION */}
@@ -64,8 +85,8 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
 
             <div className="log-panel-container">
                 <h2>Activity Log (Detailed)</h2>
-                {isLoading ? (
-                    <div className="log-panel-placeholder loading-text">**{buttonText}** Please wait for system response...</div>
+                {isLoading && !isFullReport ? (
+                    <div className="log-panel-placeholder loading-text">**Running Checks...** Please wait for system response...</div>
                 ) : isFullReport ? (
                     <LogPanel logs={currentLogs} />
                 ) : (
@@ -79,3 +100,4 @@ const Dashboard = ({ data, usageHistory, handleClearTemp, handleRunHealthCheck, 
 };
 
 export default Dashboard;
+

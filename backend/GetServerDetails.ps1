@@ -36,7 +36,7 @@ function Get-ServerMetrics {
         freeMemoryGB = [math]::Round($memory.FreePhysicalMemory / 1MB, 2)
         usedMemoryGB = [math]::Round(($memory.TotalVisibleMemorySize - $memory.FreePhysicalMemory) / 1MB, 2)
         diskSpace = $diskSpaceMetrics # Correctly nested property
-        pendingUpdates = "N/A" # Default to N/A for initial load
+        pendingUpdates = "N/A" # Default to N/A (string) for initial load, as we haven't checked yet
     }
     return $metrics
 }

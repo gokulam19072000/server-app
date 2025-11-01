@@ -62,7 +62,7 @@ h1 {
         grid-template-areas:
             "actions actions"
             "metrics metrics"
-            "graph graph"
+            "cpugraph memgraph" /* Graphs side-by-side */
             "disk services"
             "log log";
     }
@@ -74,19 +74,19 @@ h1 {
     .metric-cards {
         grid-area: metrics;
     }
-
-    .memory-graph-container {
-        grid-area: graph;
-        padding: 1.5rem;
-        background-color: var(--card-background);
-        border-radius: 0.75rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Assign graphs to grid areas */
+    .chart-container:nth-of-type(1) {
+        grid-area: cpugraph;
     }
 
     .chart-container:nth-of-type(2) {
+        grid-area: memgraph;
+    }
+
+    .chart-container:nth-of-type(3) {
         grid-area: disk;
     }
-    /* C: Drive Space Chart */
+
     .services-container {
         grid-area: services;
     }
@@ -153,6 +153,16 @@ button {
         cursor: not-allowed;
     }
 
+    /* Warning state for install button */
+    button.button-warning {
+        background-color: var(--warning-color);
+    }
+
+        button.button-warning:hover:not(:disabled) {
+            background-color: #d97706; /* Darker warning color */
+        }
+
+
 .chart-container, .services-container, .log-panel-container {
     background-color: var(--card-background);
     border-radius: 0.75rem;
@@ -161,19 +171,19 @@ button {
 }
 
 /* --- GRAPH STYLES --- */
-.memory-graph-content {
+.cpu-graph-content, .memory-graph-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-    .memory-graph-content h3 {
+    .cpu-graph-content h3, .memory-graph-content h3 {
         margin-top: 0;
         color: var(--text-color);
         font-size: 1.2rem;
     }
 
-.memory-svg {
+.cpu-svg, .memory-svg {
     border: 1px solid #475569;
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
@@ -295,6 +305,18 @@ h2 {
     color: var(--error-color);
 }
 
+.log-panel-placeholder {
+    color: var(--secondary-text-color);
+    font-style: italic;
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading-text {
+    font-weight: bold;
+    font-style: normal;
+}
+
 /* Dynamic Pop-up Styles */
 .log-popup {
     position: fixed;
@@ -362,7 +384,8 @@ h2 {
         grid-template-areas:
             "actions"
             "metrics"
-            "graph"
+            "cpugraph"
+            "memgraph"
             "disk"
             "services"
             "log";
