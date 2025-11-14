@@ -1,0 +1,66 @@
+/* frontend/src/components/LogPanel.css */
+
+.log-panel {
+    background-color: #f4f7fa; /* Light background for the panel */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 300px; /* Set a fixed height */
+}
+
+.log-content {
+    padding: 8px 16px;
+    overflow-y: auto;
+    height: 100%; /* Fill the panel */
+    font-family: 'Consolas', 'Menlo', 'monospace';
+    font-size: 0.875rem;
+}
+
+.log-entry {
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+    border-bottom: 1px solid #ececec; /* Light line between entries */
+}
+
+.log-timestamp {
+    color: #888;
+    margin-right: 12px;
+    min-width: 80px; /* For "HH:mm:ss" */
+    text-align: left;
+}
+
+.log-type {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    color: #fff;
+    margin-right: 12px;
+    min-width: 65px; /* Ensures alignment */
+    text-align: center;
+    text-transform: uppercase;
+}
+
+    /* These types match your PowerShell script's Write-Log function */
+    .log-type.info {
+        background-color: #3498db; /* Blue */
+    }
+
+    .log-type.warning {
+        background-color: #f39c12; /* Orange */
+    }
+
+    .log-type.error {
+        background-color: #e74c3c; /* Red */
+    }
+
+    .log-type.success {
+        background-color: #2ecc71; /* Green */
+    }
+
+.log-message {
+    color: #2c3e50;
+    white-space: normal;
+    word-break: break-word;
+}
