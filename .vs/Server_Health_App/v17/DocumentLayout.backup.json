@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Temp\\React project\\Server_Health_App\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\backend\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\backend\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\backend\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:backend\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\backend\\requirements.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -58,11 +58,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "LoginScreen.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LoginScreen.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\LoginScreen.jsx",
@@ -88,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "users.json",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\users.json",
               "RelativeDocumentMoniker": "backend\\users.json",
@@ -114,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "app.py",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\app.py",
               "RelativeDocumentMoniker": "backend\\app.py",
@@ -139,7 +139,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "index.css",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\index.css",
               "RelativeDocumentMoniker": "frontend\\src\\index.css",
@@ -164,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Dashboard.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\Dashboard.jsx",
@@ -177,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\App.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\App.jsx",
