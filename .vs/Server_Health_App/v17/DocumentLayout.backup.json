@@ -3,28 +3,32 @@
   "WorkspaceRootPath": "C:\\Temp\\React project\\Server_Health_App\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\components\\LogPanel.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\components\\LogPanel.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\components\\Dashboard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\components\\Dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\App.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\App.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\components\\LogPanel.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\src\\components\\LogPanel.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\frontend\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:frontend\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\React project\\Server_Health_App\\backend\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -70,37 +74,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "Dashboard.css",
+              "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.css",
+              "RelativeDocumentMoniker": "frontend\\src\\components\\Dashboard.css",
+              "ToolTip": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.css",
+              "RelativeToolTip": "frontend\\src\\components\\Dashboard.css",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAAAGIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-14T19:43:06.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "LogPanel.css",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.css",
               "RelativeDocumentMoniker": "frontend\\src\\components\\LogPanel.css",
               "ToolTip": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.css",
               "RelativeToolTip": "frontend\\src\\components\\LogPanel.css",
-              "ViewState": "AgIAACcAAAAAAAAAAAAkwEIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-14T17:31:38.762Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "LogPanel.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\LogPanel.jsx",
               "ToolTip": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LogPanel.jsx",
               "RelativeToolTip": "frontend\\src\\components\\LogPanel.jsx",
-              "ViewState": "AgIAABgAAAAAAAAAAAAswCsAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwDIAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-11-14T15:39:13.856Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "index.html",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\index.html",
               "RelativeDocumentMoniker": "frontend\\index.html",
@@ -108,12 +125,11 @@
               "RelativeToolTip": "frontend\\index.html",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-11-14T15:37:35.564Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T15:37:35.564Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "LoginScreen.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\LoginScreen.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\LoginScreen.jsx",
@@ -125,7 +141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "requirements.txt",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\requirements.txt",
               "RelativeDocumentMoniker": "backend\\requirements.txt",
@@ -137,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "users.json",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\users.json",
               "RelativeDocumentMoniker": "backend\\users.json",
@@ -145,25 +161,24 @@
               "RelativeToolTip": "backend\\users.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-11-02T13:07:11.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-02T13:07:11.885Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "App.css",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\App.css",
               "RelativeDocumentMoniker": "frontend\\src\\App.css",
               "ToolTip": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\App.css",
               "RelativeToolTip": "frontend\\src\\App.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-01T21:35:58.678Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "app.py",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\app.py",
               "RelativeDocumentMoniker": "backend\\app.py",
@@ -175,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "CPUGraph.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\CPUGraph.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\CPUGraph.jsx",
@@ -187,20 +202,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "index.css",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\index.css",
               "RelativeDocumentMoniker": "frontend\\src\\index.css",
               "ToolTip": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\index.css",
               "RelativeToolTip": "frontend\\src\\index.css",
-              "ViewState": "AgIAAMMBAAAAAAAAAAAkwOgBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAPUBAAAAAAAAAAAkwBACAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-01T17:31:32.623Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "MemoryGraph.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\MemoryGraph.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\MemoryGraph.jsx",
@@ -212,20 +227,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Dashboard.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\components\\Dashboard.jsx",
               "ToolTip": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\components\\Dashboard.jsx",
               "RelativeToolTip": "frontend\\src\\components\\Dashboard.jsx",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAAAGkAAABIAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAswHcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
               "WhenOpened": "2025-10-12T09:37:13.293Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "App.jsx",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\frontend\\src\\App.jsx",
               "RelativeDocumentMoniker": "frontend\\src\\App.jsx",
@@ -237,7 +252,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "HealthCheckScript.ps1",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\HealthCheckScript.ps1",
               "RelativeDocumentMoniker": "backend\\HealthCheckScript.ps1",
@@ -249,7 +264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "GetServerDetails.ps1",
               "DocumentMoniker": "C:\\Temp\\React project\\Server_Health_App\\backend\\GetServerDetails.ps1",
               "RelativeDocumentMoniker": "backend\\GetServerDetails.ps1",

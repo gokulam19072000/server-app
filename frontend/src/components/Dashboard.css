@@ -1,0 +1,124 @@
+/* frontend/src/components/Dashboard.css */
+
+/*
+ * This wrapper replaces the style we removed from App.css,
+ * ensuring the whole dashboard stacks vertically.
+*/
+.dashboard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* This creates the space between the rows */
+}
+
+/*
+ * This is the new rule for the rows.
+ * It makes them flexible and allows them to wrap.
+*/
+.dashboard-row {
+    display: flex;
+    flex-wrap: wrap; /* Allows panels to stack on small screens */
+    gap: 20px; /* This creates the space between panels in the SAME row */
+}
+/* Add this new rule to Dashboard.css */
+
+.updates-row {
+    justify-content: center; /* This is the line that centers the content */
+}
+
+/*
+ * This rule targets the Metric Cards row specifically
+ * to ensure they space out evenly.
+*/
+.metric-cards.dashboard-row {
+    justify-content: space-between;
+}
+
+/*
+ * This rule targets the action buttons
+ * to keep them grouped together.
+*/
+.action-buttons.dashboard-row {
+    justify-content: flex-start;
+}
+
+/*
+ * This panel style is for the "Services" and "Logs" containers.
+ * 'flex: 1' is the magic part that makes them share space.
+*/
+.dashboard-panel {
+    flex: 1; /* Each panel will grow to take up available space */
+    min-width: 300px; /* Prevents them from getting too small */
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    overflow: hidden; /* Fixes any weird layout overlaps */
+}
+
+    .dashboard-panel h2 {
+        margin: 0;
+        padding: 12px 16px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+/*
+ * This styles the chart containers.
+ * 'flex: 1' makes all 3 share the row.
+*/
+/* In frontend/src/components/Dashboard.css */
+
+.chart-container {
+    /* This tells each chart to try to be ~32% of the row */
+    flex-basis: 32%;
+    /* This lets them grow to fill any extra space */
+    flex-grow: 1;
+    /* This lets them shrink if the screen is too narrow */
+    flex-shrink: 1;
+    min-width: 280px; /* A slightly smaller minimum width */
+
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 16px;
+    /* This ensures the h2 and chart stack correctly INSIDE the container */
+    display: flex;
+    flex-direction: column;
+}
+
+    .chart-container h2 {
+        margin-top: 0;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+/*
+ * This makes the LogPanel and ServiceTable components
+ * fill the height of their parent panel.
+*/
+.log-panel-container .log-panel,
+.services-container .service-table-container {
+    flex-grow: 1;
+    overflow: hidden; /* Prevents internal scrollbars from breaking layout */
+}
+
+/* Give the LogPanel a flexible height instead of a fixed one */
+.log-panel {
+    height: 400px; /* Or min-height: 400px; */
+}
+
+/* Placeholders from your original Dashboard.jsx */
+.log-panel-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    color: #888;
+    padding: 20px;
+    text-align: center;
+}

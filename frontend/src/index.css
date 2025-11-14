@@ -148,6 +148,7 @@ h1 {
             "metrics metrics"
             "cpugraph memgraph" /* Graphs side-by-side */
             "disk services"
+            "updates updates" /* <-- ADDED THIS ROW */
             "log log";
     }
 
@@ -174,6 +175,25 @@ h1 {
     .services-container {
         grid-area: services;
     }
+
+    /* --- ADDED STYLES FOR UPDATES CONTAINER --- */
+    .pending-updates-container {
+        grid-area: updates;
+        background-color: var(--card-background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        /* Override MetricCard styles when it's inside the new container */
+        .pending-updates-container .metric-card {
+            flex: none; /* Remove flex properties */
+            min-width: auto; /* Remove min-width */
+            padding: 0; /* Remove padding, parent has it */
+            box-shadow: none; /* Remove shadow, parent has it */
+            background-color: transparent; /* Remove bg, parent has it */
+        }
+    /* --- END OF ADDED STYLES --- */
 
     .log-panel-container {
         grid-area: log;
@@ -473,6 +493,7 @@ h2 {
             "memgraph"
             "disk"
             "services"
+            "updates" /* <-- ADDED THIS ROW */
             "log";
     }
 
@@ -485,4 +506,23 @@ h2 {
         flex-direction: column;
         margin-top: 1rem;
     }
+
+    /* --- ADDED STYLES FOR UPDATES CONTAINER --- */
+    .pending-updates-container {
+        grid-area: updates;
+        background-color: var(--card-background);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        /* Override MetricCard styles when it's inside the new container */
+        .pending-updates-container .metric-card {
+            flex: none; /* Remove flex properties */
+            min-width: auto; /* Remove min-width */
+            padding: 0; /* Remove padding, parent has it */
+            box-shadow: none; /* Remove shadow, parent has it */
+            background-color: transparent; /* Remove bg, parent has it */
+        }
+    /* --- END OF ADDED STYLES --- */
 }

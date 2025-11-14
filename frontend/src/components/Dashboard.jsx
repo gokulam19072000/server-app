@@ -1,10 +1,10 @@
 import React from 'react';
-import MetricCard from './MetricCard';
-import DiskChart from './DiskChart';
-import ServiceTable from './ServiceTable';
-import LogPanel from './LogPanel';
-import MemoryGraph from './MemoryGraph';
-import CPUGraph from './CPUGraph';
+import MetricCard from './MetricCard.jsx';
+import DiskChart from './DiskChart.jsx';
+import ServiceTable from './ServiceTable.jsx';
+import LogPanel from './LogPanel.jsx';
+import MemoryGraph from './MemoryGraph.jsx';
+import CPUGraph from './CPUGraph.jsx';
 
 const Dashboard = ({ user, data, usageHistory, handleClearTemp, handleRunHealthCheck, handleInstallUpdates, isLoading }) => {
     // 1. Initial check for data presence
@@ -74,7 +74,7 @@ const Dashboard = ({ user, data, usageHistory, handleClearTemp, handleRunHealthC
                     value={`${diskSpace.usedPercent ? diskSpace.usedPercent.toFixed(2) : 'N/A'}%`}
                     type="disk"
                 />
-                <MetricCard title="Pending Updates" value={pendingUpdates} type="updates" />
+                {/* Pending Updates card has been moved below, just above the Activity Log */}
             </div>
 
             {/* CPU AND MEMORY GRAPHS - Side by side layout */}
@@ -95,6 +95,12 @@ const Dashboard = ({ user, data, usageHistory, handleClearTemp, handleRunHealthC
                 <ServiceTable services={currentServices} />
             </div>
 
+            {/* New container for Pending Updates, placed above Activity Log */}
+            <div className="pending-updates-container">
+                {/* This MetricCard will now be styled by its new parent container */}
+                <MetricCard title="Pending Updates" value={pendingUpdates} type="updates" />
+            </div>
+
             <div className="log-panel-container">
                 <h2>Activity Log (Detailed)</h2>
                 {isLoading && !isFullReport ? (
@@ -112,4 +118,3 @@ const Dashboard = ({ user, data, usageHistory, handleClearTemp, handleRunHealthC
 };
 
 export default Dashboard;
-
